@@ -24,6 +24,8 @@ public class User {
     private LocalDate dateOfBirth;
     private Integer age;
     private Integer phoneNumber = null;
+    private Integer listNr;
+    private String fileName;
 
     public static Comparator<User> UserAgeComparator = new Comparator<User>() {
         @Override
@@ -51,46 +53,6 @@ public class User {
         this.surName = surName;
         this.dateOfBirth = dateOfBirth;
         this.age = getAgeFromDateOfBirth(dateOfBirth);
-        this.phoneNumber = phoneNumber;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBrith) {
-        this.dateOfBirth = dateOfBrith;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String sureName) {
-        this.surName = sureName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

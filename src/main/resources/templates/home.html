@@ -34,50 +34,57 @@
     </table>
 </form>
 
-
-<i class="fa fa-car"></i>
-<i class="fa fa-car" style="font-size:48px;"></i>
-<i class="fa fa-car" style="font-size:60px;color:red;"></i>
-<i class="fa fa-trash-alt"></i>
-
-<div class="col-lg-8">
-    <div class="table-responsive table--no-card m-b-20">
-        <table class="table table-condensed-14 table-bordered table-striped table-sm"
-               id="mainTable">
-            <thead class="thead-dark">
-            <tr>
-                <th style="display:none"></th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Age</th>
-                <th>Phone</th>
-                <th>List Nr.</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user: ${users}" class="uncheckedRow"
-                onclick="changeRowColorOnTable(this)">
-                <td style="display:none" th:text="${user.id}">
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.surName}"></td>
-                <td th:text="${user.age}"></td>
-                <td th:text="${user.phoneNumber}"></td>
-                <td align="center" style="width:2%">
-                    <form th:action="@{/remove?id=} + ${{user.id}}" method="post">
-                        <div>
-                            <button th:name="remove" class="item"
-                                    data-toggle="tooltip" data-placement="top" title="Remove">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="table-responsive table--no-card m-b-20">
+            <table class="table table-condensed-14 table-bordered table-striped table-sm"
+                   id="mainTable">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="display:none"></th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Phone</th>
+                    <th>fileName</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}" class="uncheckedRow"
+                    onclick="changeRowColorOnTable(this)">
+                    <td style="display:none" th:text="${user.id}">
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surName}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td th:text="${user.phoneNumber}"></td>
+                    <td th:text="${user.fileName}"></td>
+                    <td align="center" style="width:2%">
+                        <form th:action="@{/remove?id=} + ${{user.id}}" method="post">
+                            <div>
+                                <button th:name="remove" class="item"
+                                        data-toggle="tooltip" data-placement="top" title="Remove">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="col-sm-12">
+            <select class="selectpicker" id="fileNameList" name="fileNameList" data-live-search="true">
+                <option th:each="list: ${fileNameList}" th:value="${list}"
+                        th:text="${list}"></option>
+            </select>
+        </div>
     </div>
 </div>
-
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script src="assets/plugins/DataTables-1.10.18/dataTables.bootstrap4.min.js"></script>
@@ -85,10 +92,10 @@
 
 $(document).ready( function () {
     $('#mainTable').DataTable({
-        "paging":   false,
         "info":     false
     });
 } );
+
 </script>
 </body>
 </html>

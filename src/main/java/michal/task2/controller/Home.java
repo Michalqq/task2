@@ -44,10 +44,19 @@ public class Home {
             System.out.println(arr[i]);
             fillUserData(arr[i]);
         }
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            if (user.getFileName() == null) {
+                user.setFileName(file.getOriginalFilename());
+            }
+        }
+        for (User user:users){
+            userRepository.save(user);
+        }
         modelAndView.addObject("name", myString);
-        modelAndView.addObject("users", userRepository.findAll());
+        modelAndView.addObject("users", users);
+        modelAndView.addObject("fileNameList", userRepository.fileNameList());
         modelAndView.setViewName("home");
-        System.out.println("TEEEEEEEEST");
         System.out.println(userRepository.findAll().size());
         return modelAndView;
     }

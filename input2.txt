@@ -1,0 +1,9 @@
+Michal; Kraciuk; 1993-06-05; 518*969*587
+
+Andrzej; Kowalski; 1990-10-10; 500480480
+Tomasz; Trzeciak; 1950-01-15; 610-959-150
+Amadeusz; Nowak; 1998-06-05;
+Michal; Kraciuk22, 1943-06-05,
+Michal; Kraciuk123123; 1993-06-05; 518*969*587
+Michal; Kraciuk; 1993-06-05; 518*969*587
+Michal; Kraciuk; 1993-06-05; 518*969*587
