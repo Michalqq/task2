@@ -30,6 +30,7 @@ public class Home {
         List<User> testList = userRepository.findAll();
         modelAndView.setViewName("home");
         modelAndView.addObject("name", testList.toString());
+        modelAndView.addObject("users", userRepository.findAll());
         return modelAndView;
     }
 
@@ -69,8 +70,8 @@ public class Home {
                 Integer phoneNumber = 0;
                 if (inputValue[3].replaceAll("\\D+", "").length() > 8) {
                     phoneNumber = Integer.parseInt(inputValue[3].replaceAll("\\D+", ""));
+                    addNewUserToArr(name, surName, dateOfBirth, phoneNumber);
                 }
-                addNewUserToArr(name, surName, dateOfBirth, phoneNumber);
             }
         }
     }
@@ -84,10 +85,10 @@ public class Home {
             System.out.println("Birthdate is after today's day. Data are incorrect. This user won't be added");
             return false;
         }
-        if (phoneNumber != 0 && phoneNumber < 100000000) {
-            System.out.println("Phone number is incorrect. This user will have empty phone number");
-            phoneNumber = 0;
-        }
+//        if (phoneNumber != 0 && phoneNumber < 100000000) {
+//            System.out.println("Phone number is incorrect. This user will have empty phone number");
+//            phoneNumber = 0;
+//        }
         this.addNew(name, surName, dateOfBirth, phoneNumber);
         return true;
     }

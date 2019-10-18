@@ -6,17 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
     <!-- Data Table-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
 </head>
 <body>
@@ -35,6 +33,12 @@
         </tr>
     </table>
 </form>
+
+
+<i class="fa fa-car"></i>
+<i class="fa fa-car" style="font-size:48px;"></i>
+<i class="fa fa-car" style="font-size:60px;color:red;"></i>
+<i class="fa fa-trash-alt"></i>
 
 <div class="col-lg-8">
     <div class="table-responsive table--no-card m-b-20">
@@ -59,11 +63,11 @@
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.phoneNumber}"></td>
                 <td align="center" style="width:2%">
-                    <form th:action="@{/edit?id=} + ${{user.id}}" method="post">
-                        <div class="table-data-feature-min">
-                            <button th:name="edit" class="item"
-                                    data-toggle="tooltip" data-placement="top" title="Edit">
-                                <i class="zmdi zmdi-edit"></i>
+                    <form th:action="@{/remove?id=} + ${{user.id}}" method="post">
+                        <div>
+                            <button th:name="remove" class="item"
+                                    data-toggle="tooltip" data-placement="top" title="Remove">
+                                <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
                     </form>
