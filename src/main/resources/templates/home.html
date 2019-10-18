@@ -19,23 +19,38 @@
 </head>
 <body>
 
-<form method="POST" action="/" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td>
-                <form:label path="file">Select a file to upload</form:label>
-            </td>
-            <td><input type="file" name="file"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Submit"/></td>
-        </tr>
-    </table>
-</form>
-
 <br>
 <br>
 <div class="row">
+    <div class="col-lg-3">
+        <div class="col-sm-12">
+            <form method="POST" action="/" enctype="multipart/form-data">
+                <form:label path="file">Select a file to upload</form:label>
+                <input type="file" name="file" class="btn btn-primary btn-md"/>
+                <button name="action" type="success"
+                        class="btn btn-primary btn-md">
+                    <i class="fas fa-check-circle"></i>Submit
+                </button>
+            </form>
+        </div>
+        <br>
+        <div class="col-sm-12">
+            <form action="/removeList" method="POST">
+                <p>Select file to remove users from database</p>
+                <select class="selectpicker" id="fileNameList" name="fileNameList" data-live-search="true">
+                    <option th:each="list: ${fileNameList}" th:value="${list}"
+                            th:text="${list}"></option>
+                </select>
+                <br>
+                <br>
+                <button name="action" value="removeList" type="danger"
+                        class="btn btn-primary btn-md">
+                    <i class="fas fa-check-circle"></i>Remove list
+                </button>
+            </form>
+        </div>
+    </div>
+
     <div class="col-lg-8">
         <div class="table-responsive table--no-card m-b-20">
             <table class="table table-condensed-14 table-bordered table-striped table-sm"
@@ -75,24 +90,7 @@
             </table>
         </div>
     </div>
-    <div class="col-lg-3">
-        <div class="col-sm-12">
 
-            <form action="/removeList" method="POST">
-                <p>Select file to remove users from database</p>
-                <select class="selectpicker" id="fileNameList" name="fileNameList" data-live-search="true">
-                    <option th:each="list: ${fileNameList}" th:value="${list}"
-                            th:text="${list}"></option>
-                </select>
-                <div class="input-group col-sm-12">
-                    <button name="action" value="removeList" type="submit"
-                            class="btn btn-primary btn-md">
-                        <i class="fas fa-check-circle"></i>Remove list
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -104,7 +102,6 @@ $(document).ready( function () {
         "info":     false
     });
 } );
-
 
 
 </script>
