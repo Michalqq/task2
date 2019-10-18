@@ -31,6 +31,7 @@ public class Home {
         modelAndView.setViewName("home");
         modelAndView.addObject("name", testList.toString());
         modelAndView.addObject("users", userRepository.findAll());
+        modelAndView.addObject("fileNameList", userRepository.fileNameList());
         return modelAndView;
     }
 
@@ -53,19 +54,11 @@ public class Home {
         for (User user:users){
             userRepository.save(user);
         }
-        modelAndView.addObject("name", myString);
         modelAndView.addObject("users", users);
         modelAndView.addObject("fileNameList", userRepository.fileNameList());
         modelAndView.setViewName("home");
         System.out.println(userRepository.findAll().size());
         return modelAndView;
-    }
-
-    @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(100000);
-        return multipartResolver;
     }
 
     public void fillUserData(String text) {

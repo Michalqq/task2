@@ -18,7 +18,6 @@
 
 </head>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'"/>
 
 <form method="POST" action="/" enctype="multipart/form-data">
     <table>
@@ -78,10 +77,20 @@
     </div>
     <div class="col-lg-3">
         <div class="col-sm-12">
-            <select class="selectpicker" id="fileNameList" name="fileNameList" data-live-search="true">
-                <option th:each="list: ${fileNameList}" th:value="${list}"
-                        th:text="${list}"></option>
-            </select>
+
+            <form action="/removeList" method="POST">
+                <p>Select file to remove users from database</p>
+                <select class="selectpicker" id="fileNameList" name="fileNameList" data-live-search="true">
+                    <option th:each="list: ${fileNameList}" th:value="${list}"
+                            th:text="${list}"></option>
+                </select>
+                <div class="input-group col-sm-12">
+                    <button name="action" value="removeList" type="submit"
+                            class="btn btn-primary btn-md">
+                        <i class="fas fa-check-circle"></i>Remove list
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -95,6 +104,8 @@ $(document).ready( function () {
         "info":     false
     });
 } );
+
+
 
 </script>
 </body>

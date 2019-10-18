@@ -14,4 +14,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT DISTINCT fileName FROM User")
     List<String> fileNameList();
+
+    @Query("FROM User WHERE fileName = :fileName")
+    List<User> findUsersWhereFileNameIs(String fileName);
+
 }

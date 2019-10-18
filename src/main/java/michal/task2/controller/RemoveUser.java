@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -26,5 +27,13 @@ public class RemoveUser {
         //if (user.isPresent()) userRepository.delete(userRepository.findById(userId));
         modelAndView.setViewName("redirect:/");
         return modelAndView;
+    }
+    @RequestMapping(value = "/removeList", method = RequestMethod.POST)
+    public String addNewItem(@RequestParam(value = "fileNameList", defaultValue = "") String fileName){
+        List<User> users = userRepository.findUsersWhereFileNameIs(fileName);
+        for (User user:users){
+            userRepository.delete(user);
+        }
+        return "redirect:/";
     }
 }
