@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Michal Kraciuk</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <!-- Data Table-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<p th:text="'Hello, ' + ${name} + '!'"/>
+
+<form method="POST" action="/" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <form:label path="file">Select a file to upload</form:label>
+            </td>
+            <td><input type="file" name="file"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+</form>
+
+<div class="col-lg-8">
+    <div class="table-responsive table--no-card m-b-20">
+        <table class="table table-condensed-14 table-bordered table-striped table-sm"
+               id="mainTable">
+            <thead class="thead-dark">
+            <tr>
+                <th style="display:none"></th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Phone</th>
+                <th>List Nr.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users}" class="uncheckedRow"
+                onclick="changeRowColorOnTable(this)">
+                <td style="display:none" th:text="${user.id}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surName}"></td>
+                <td th:text="${user.age}"></td>
+                <td th:text="${user.phoneNumber}"></td>
+                <td align="center" style="width:2%">
+                    <form th:action="@{/edit?id=} + ${{user.id}}" method="post">
+                        <div class="table-data-feature-min">
+                            <button th:name="edit" class="item"
+                                    data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="assets/plugins/DataTables-1.10.18/dataTables.bootstrap4.min.js"></script>
+<script th:inline="javascript">
+
+$(document).ready( function () {
+    $('#mainTable').DataTable({
+        "paging":   false,
+        "info":     false
+    });
+} );
+</script>
+</body>
+</html>
