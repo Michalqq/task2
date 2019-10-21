@@ -2,19 +2,29 @@ package michal.task2.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.stereotype.Component;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 
-@Component
+@Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class LogsGenerator {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String logDescription;
-    private LocalDate date;
+    private LocalDateTime date;
 
-
-    public void add
+    public LogsGenerator(String logDescription) {
+        this.logDescription = logDescription;
+        this.date = LocalDateTime.now();
+    }
 
 }

@@ -6,7 +6,6 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,11 +15,14 @@ import java.util.List;
 @Service
 public class FileEncoder {
 
-    @Autowired
     private UserRepository userRepository;
+    private UserSaver userSaver;
 
     @Autowired
-    private UserSaver userSaver;
+    public FileEncoder(UserRepository userRepository, UserSaver userSaver){
+        this.userRepository = userRepository;
+        this.userSaver = userSaver;
+    }
 
     public List<User> fileRead(MultipartFile file) throws IOException {
         ByteArrayInputStream stream = new ByteArrayInputStream(file.getBytes());
@@ -30,12 +32,7 @@ public class FileEncoder {
             fillUserData(arr[i]);
         }
         List<User> users = userRepository.findAll();
-        for (User user : users) {
-            if (user.getFileName() == null) {
-                user.setFileName(file.getOriginalFilename());
-            }
-        }
-        for (User user : users) userRepository.save(user);
+        this.setFileNameAndSaveToDB(users, file);
         return users;
     }
 
@@ -54,5 +51,14 @@ public class FileEncoder {
                 }
             }
         }
+    }
+
+    public void setFileNameAndSaveToDB(List<User> users, MultipartFile file){
+        for (User user : users) {
+            if (user.getFileName() == null) {
+                user.setFileName(file.getOriginalFilename());
+            }
+        }
+        for (User user : users) userRepository.save(user);
     }
 }
