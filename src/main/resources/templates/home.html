@@ -59,7 +59,23 @@
                 </form>
                 <hr>
                 <h5 th:text="${usersQuantity}"></h5>
-                <h5 th:text="${theOldestUserWithPhoneNumber}"></h5>
+                <div th:if="${theOldestUserWithPhoneNumber != null and !theOldestUserWithPhoneNumber.isEmpty()}">
+                    <hr>
+                    <h5>The oldest users with phone number:</h5>
+                    <table class="table table-condensed-14 table-bordered table-striped table-sm">
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Age</th>
+                            <th>Phone</th>
+                        </tr>
+                        <tr th:each="user: ${theOldestUserWithPhoneNumber}">
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.surName}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:text="${user.phoneNumber}"></td>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -136,6 +152,9 @@ $(document).ready( function () {
         "info":     false,
     });
 } );
+
+
+
 
 
 

@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("FROM User WHERE fileName = :fileName")
     List<User> findUsersWhereFileNameIs(String fileName);
 
-    @Query("FROM User WHERE age = (SELECT COALESCE(MAX(age),0) FROM User)")
+    @Query("FROM User WHERE age = (SELECT COALESCE(MAX(age),0) FROM User WHERE phoneNumber > 0)")
     List<User> findTheOldestUsersWithPhoneNumber();
 
 }
