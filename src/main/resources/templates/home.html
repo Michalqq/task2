@@ -23,74 +23,88 @@
 <br>
 <div class="row">
     <div class="col-lg-3">
-        <div class="col-sm-12">
-            <form method="POST" action="/" enctype="multipart/form-data">
-                <form:label path="file">Select a file to upload</form:label>
-                <input type="file" name="file" class="btn btn-primary btn-md"/>
-                <button name="action" type="success"
-                        class="btn btn-primary btn-md">
-                    <i class="fas fa-check-circle"></i>Submit
-                </button>
-            </form>
-        </div>
-        <br>
-        <div class="col-sm-12">
-            <form action="/removeList" method="POST">
-                <p>Select file to remove users from database</p>
-                <select class="selectpicker" id="fileNameList" name="fileNameList" data-live-search="true">
-                    <option th:each="list: ${fileNameList}" th:value="${list}"
-                            th:text="${list}"></option>
-                </select>
-                <br>
-                <br>
-                <button name="action" value="removeList" type="danger"
-                        class="btn btn-primary btn-md">
-                    <i class="fas fa-check-circle"></i>Remove list
-                </button>
-            </form>
-        </div>
-    </div>
 
-    <div class="col-lg-8">
-        <div class="table-responsive table--no-card m-b-20">
-            <table class="table table-condensed-14 table-bordered table-striped table-sm"
-                   id="mainTable">
-                <thead class="thead-dark">
-                <tr>
-                    <th style="display:none"></th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Age</th>
-                    <th>Phone</th>
-                    <th>fileName</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="user: ${users}" class="uncheckedRow"
-                    onclick="changeRowColorOnTable(this)">
-                    <td style="display:none" th:text="${user.id}">
-                    <td th:text="${user.name}"></td>
-                    <td th:text="${user.surName}"></td>
-                    <td th:text="${user.age}"></td>
-                    <td th:text="${user.phoneNumber}"></td>
-                    <td th:text="${user.fileName}"></td>
-                    <td align="center" style="width:2%">
-                        <form th:action="@{/remove?id=} + ${{user.id}}" method="post">
-                            <div>
-                                <button th:name="remove" class="item"
-                                        data-toggle="tooltip" data-placement="top" title="Remove">
-                                    <i class="fas fa-trash-alt"></i>
+        <div class="card">
+            <div class="col-sm-12">
+                <form method="POST" action="/" enctype="multipart/form-data">
+                    <h4>Select a file to upload:</h4>
+                    <input type="file" name="file" class="btn btn-md"/>
+                    <button name="action" type="success" align="right"
+                            class="btn btn-primary btn-md">
+                        <i class="fas fa-check-circle"></i>Submit
+                    </button>
+                </form>
+            </div>
+            <br>
+            <div class="col-sm-12">
+                <form action="/removeList" method="POST">
+                    <div th:if="${fileNameList != null and !fileNameList.isEmpty()}">
+                        <h5>Select a file name list to remove all users from this list:</h5>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <select class="selectpicker btn btn-secondary btn-md" id="fileNameList"
+                                        name="fileNameList"
+                                        data-live-search="true">
+                                    <option th:each="list: ${fileNameList}" th:value="${list}"
+                                            th:text="${list}"></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6" align="right">
+                                <button name="action" value="removeList" type="danger"
+                                        class="btn btn-primary btn-md">
+                                    <i class="fas fa-check-circle"></i>Remove list
                                 </button>
                             </div>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="table-responsive table--no-card m-b-20">
+                <h1>Table:
+                </h1>
+                <table class="table table-condensed-14 table-bordered table-striped table-sm"
+                       id="mainTable" data-page-length='5'>
+                    <thead class="thead-dark">
+                    <tr>
+                        <th style="display:none"></th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Age</th>
+                        <th>Phone</th>
+                        <th>fileName</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user: ${users}" class="uncheckedRow"
+                        onclick="changeRowColorOnTable(this)">
+                        <td style="display:none" th:text="${user.id}">
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.surName}"></td>
+                        <td th:text="${user.age}"></td>
+                        <td th:text="${user.phoneNumber}"></td>
+                        <td th:text="${user.fileName}"></td>
+                        <td align="center" style="width:2%">
+                            <form th:action="@{/remove?id=} + ${{user.id}}" method="post">
+                                <div>
+                                    <button th:name="remove" class="item"
+                                            data-toggle="tooltip" data-placement="top" title="Remove">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -99,10 +113,9 @@
 
 $(document).ready( function () {
     $('#mainTable').DataTable({
-        "info":     false
+        "info":     false,
     });
 } );
-
 
 </script>
 </body>

@@ -1,11 +1,18 @@
-first_name;last_name;birth_date;phone_no
-Stefan;Testowy;1988.11.11;600700800
-Maria;ZiÃ³Å‚ko;1999.1.1;555666777;
-;;;
-Jolanta;Magia;2000.02.04;666000111
-
- marian;kowalewski;1950.10.01;670540120
-Zygmunt;	Stefanowicz;1991.06.01;-
-Ernest;GÄ…bka;1991.06.01;
-ElÅ¼bieta;Å»Ã³Å‚w;1988.03.03;670540120
-ElÅ¼bieta2;Å»Ã³asdasÅ‚w;1978.03.03;670540120
+first_name	;last_name	;birth_date;	phone_no
+Stefan	;Testowy;	1988.11.11;	600700800
+Maria	;Zió³ko	;1999.1.1;	555666777
+			
+Jolanta	;Magia	;2000.02.04;	666000111
+			
+ marian;	kowalewski;	1950.10.01;	670530120
+Zygmunt	"	;Stefanowicz";	1991.06.01;	-
+Ernest;	G¹bka	;1991.06.01;	;
+El¿bieta	;¯ó³w	;1988.03.03;	670540120
+El¿bietaa2	;¯óasdas³aaw	;1978.03.03	;670540120
+Jolantaa2	;Magiaa2	;2000.02.04	;666000111
+			
+ mariana2	;kowalewskia2	;1950.10.01	;123123121
+Zygmunta2	;"	Stefanowicz2";	1991.06.01;	-
+Ernesta2	;G¹bkaa2;	1991.06.01	;
+El¿bietaa2	;¯ó³wa2;	1988.03.03;	671540120;
+El¿bietaa22	;¯óasdas³wa2	;1978.03.03;	672540120
