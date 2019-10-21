@@ -3,9 +3,7 @@ package michal.task2.repository;
 import michal.task2.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     //void delete(Optional<User> byId);
@@ -17,5 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("FROM User WHERE fileName = :fileName")
     List<User> findUsersWhereFileNameIs(String fileName);
+
+    @Query("FROM User WHERE age = (SELECT COALESCE(MAX(age),0) FROM User)")
+    List<User> findTheOldestUsersWithPhoneNumber();
 
 }
