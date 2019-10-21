@@ -38,7 +38,7 @@ public class UserSaver {
         User user = new User(name, surName, dateOfBirth, phoneNumber);
         int flag = 0;
         for (User userFromDB : userRepository.findAll()) {
-            if (userFromDB.getPhoneNumber().equals(user.getPhoneNumber())) {
+            if (userFromDB.getPhoneNumber().equals(user.getPhoneNumber()) && user.getPhoneNumber().toString().length()==9) {
                 flag = 1;
                 logsRepository.save(new LogsGenerator(user.getName() + " " + user.getSurName() +
                         " this user has the same phone number as user:(" +

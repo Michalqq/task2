@@ -46,6 +46,7 @@ public class Home {
 
     public ModelAndView homeGenerator(ModelAndView modelAndView, List<User> users){
         modelAndView.addObject("users", users);
+        modelAndView.addObject("usersQuantity", "Number of users: " + users.size());
         modelAndView.addObject("fileNameList", userRepository.fileNameList());
         modelAndView.addObject("logs", logsRepository.findAll());
         modelAndView.setViewName("home");

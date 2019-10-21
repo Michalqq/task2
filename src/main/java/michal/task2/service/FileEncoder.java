@@ -40,15 +40,16 @@ public class FileEncoder {
         String[] inputValue = text.replaceAll(" ", "").split(";");
         if (inputValue.length > 4) System.out.println("Plik wejściowy ma zbyt dużo danych w 1 linii");
         if (inputValue.length > 2) {
-            String name = inputValue[0].replaceAll("\\p{IsDigit}", "");
-            String surName = inputValue[1].replaceAll("\\p{IsDigit}", "");
-            if (inputValue[2].replaceAll("\\D+", "").length() > 7) {
-                LocalDate dateOfBirth = LocalDate.parse(inputValue[2].replaceAll("[^0-9]", ""), DateTimeFormatter.ofPattern("yyyyMMdd"));
+            String name = getOnlyAlphabeticLetters(inputValue[0]);
+            String surName = getOnlyAlphabeticLetters(inputValue[1]);
+            if (getOnlyNumeric(inputValue[2]).length() > 7) {
+                System.out.println(inputValue[2]);
+                LocalDate dateOfBirth = LocalDate.parse(getOnlyNumeric(inputValue[2]), DateTimeFormatter.ofPattern("yyyyMMdd"));
                 Integer phoneNumber = 0;
-                if (inputValue[3].replaceAll("\\D+", "").length() == 9) {
-                    phoneNumber = Integer.parseInt(inputValue[3].replaceAll("\\D+", ""));
-                    userSaver.addNewUserToArr(name, surName, dateOfBirth, phoneNumber);
+                if (getOnlyNumeric(inputValue[3]).length() == 9) {
+                    phoneNumber = Integer.parseInt(getOnlyNumeric(inputValue[3]));
                 }
+                userSaver.addNewUserToArr(name, surName, dateOfBirth, phoneNumber);
             }
         }
     }
@@ -60,5 +61,17 @@ public class FileEncoder {
             }
         }
         for (User user : users) userRepository.save(user);
+    }
+
+    public String capitalizeText(String text){
+        if (text.length()>1) return text.substring(0,1).toUpperCase() + text.substring(1).toLowerCase();
+        else return text.toUpperCase();
+    }
+
+    public String getOnlyAlphabeticLetters(String text){
+        return capitalizeText(text.replaceAll("[^a-zA-Z]", ""));
+    }
+    public String getOnlyNumeric(String text){
+        return text.replaceAll("\\D+", "");
     }
 }
