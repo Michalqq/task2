@@ -39,7 +39,7 @@ public class FileEncoder {
     public void fillUserData(String text) {
         String[] inputValue = text.replaceAll(" ", "").split(";");
         if (inputValue.length > 4) System.out.println("Plik wejściowy ma zbyt dużo danych w 1 linii");
-        if (inputValue.length > 2) {
+        if (inputValue.length > 1) {
             String name = getOnlyAlphabeticLetters(inputValue[0]);
             String surName = getOnlyAlphabeticLetters(inputValue[1]);
             if (getOnlyNumeric(inputValue[2]).length() > 7) {

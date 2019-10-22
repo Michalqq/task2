@@ -6,9 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    //void delete(Optional<User> byId);
-    @Query("SELECT COALESCE(MAX(listNr),0) FROM User")
-    Integer findMaxListNr();
 
     @Query("SELECT DISTINCT fileName FROM User")
     List<String> fileNameList();
@@ -18,5 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("FROM User WHERE age = (SELECT COALESCE(MAX(age),0) FROM User WHERE phoneNumber > 0)")
     List<User> findTheOldestUsersWithPhoneNumber();
+
 
 }
